@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conscience</title>
+<meta name="description" content="Neal's Conscience account. Conscience which does the work on your to-do list and stops at the one step only you can take.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230F3F3A'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23F7FAF8' stroke-width='5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Overpass:wght@400;600;800;900&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-phase="rest">
+<div class="stage">
+  <main class="floor">
+    <header class="bar">
+      <p class="mark"><span class="ring" aria-hidden="true"></span>Conscience</p>
+      <div class="bar-right">
+        <p class="acct"><strong>Neal's account</strong> Real tasks and real drafts. Tuesday, Nov 3.</p>
+        <button class="link-btn" id="reset" type="button">Start over</button>
+      </div>
+    </header>
+
+    <section class="pitch">
+      <h1>Conscience does the work on your <span class="nb">to-do</span> list, then stops at the one step only you can take.</h1>
+      <p class="sub">For students juggling classes, clubs and life. It finds tasks in your connected accounts and prepares the work from your files, so it's ready when you look.</p>
+    </section>
+
+    <div class="route">
+      <section class="plate" aria-labelledby="plate-title">
+        <div class="plate-head">
+          <h2 id="plate-title"><span class="sign" aria-hidden="true">1</span>Your plate</h2>
+          <p class="count" id="count" aria-live="polite"></p>
+        </div>
+        <ul class="pile" id="pile"></ul>
+      </section>
+      <section class="work" id="work" aria-label="Conscience does the work">
+        <div class="work-body" id="work-body"></div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <footer class="fine">
+      <div>
+        <p>Real account. These are Neal's own open tasks, and each draft is built from what Conscience prepared and the files in his account. Approving does nothing outside this page.</p>
+        <p>Conscience is real. Today it has one user: Neal, who built it and runs his own life on it.</p>
+      </div>
+      <p>This page is a simplified walkthrough, not the app's own screen. The edit box and the Approve button were built for this demo, and each source list summarizes what that draft cites. In the real app, you copy a draft or save it to Outlook Drafts, then edit and send it there.</p>
+    </footer>
+  </main>
+
+  <aside class="wall" id="wall" aria-labelledby="wall-title">
+    <div class="wall-in">
+      <h2 id="wall-title"><span class="sign" aria-hidden="true">3</span>You approve</h2>
+      <p class="wall-line" id="wall-line">The last step is yours.</p>
+      <p class="wall-note" id="wall-note" hidden></p>
+      <button class="wall-btn" id="wall-btn" type="button" hidden></button>
+      <button class="skip-btn" id="wall-skip" type="button" hidden>Not this one</button>
+      <p class="wall-rule">The work it prepares on its own can't send, book or submit anything.</p>
+      <blockquote class="wall-quote">
+        <p>“Conscience does the whole grind and stops only at the wall that has to be you.”</p>
+        <footer>Neal Parekh, who built it</footer>
+      </blockquote>
+    </div>
+  </aside>
+</div>
+<script src="real-data.js"></script>
+<script src="auto-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

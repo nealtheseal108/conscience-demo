@@ -1,0 +1,646 @@
+/* The yellow wall. Green guides, yellow means you must act. */
+:root {
+  --spruce: #0F3F3A;
+  --lift: #185249;
+  --paper: #F7FAF8;
+  --ink: #0C1F1D;
+  --marigold: #FFC21A;
+  --blank: #FFE9A3;
+  --mist: #B9D0CA;
+  --slate: #4A5F5B;
+  --sans: "Overpass", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Literata", Georgia, serif;
+  --lifted: 0 .25rem 0 rgba(12, 31, 29, .35);
+}
+
+/* 1rem is 16px at 1920x1080 and scales with the window, so the layout holds at laptop sizes. */
+html { font-size: clamp(11.5px, min(.8333vw, 1.4815vh), 24px); }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--spruce);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 1.5rem;
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul, ol, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+button, input { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: .19rem solid var(--paper); outline-offset: .19rem; }
+.sheet :focus-visible, .wall :focus-visible { outline-color: var(--ink); }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 23vw;
+  min-height: 100dvh;
+  overflow: clip;
+}
+
+/* Open work fills the window. The first screen grows instead, so nothing is ever cut off. */
+body:not([data-phase="rest"]) .stage { height: max(100dvh, 62rem); }
+
+.floor {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr) auto;
+  min-width: 0;
+}
+
+/* Top bar */
+.bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 3rem 0;
+}
+
+.bar-right { display: flex; align-items: center; gap: 2rem; }
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 1.875rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.ring {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: .28rem solid var(--paper);
+  border-radius: 50%;
+  transform: translateY(-.1rem);
+}
+
+.acct { font-size: 1.1875rem; color: var(--mist); }
+
+.acct strong {
+  display: inline-block;
+  margin-right: .6rem;
+  padding: .24rem .7rem .08rem;
+  border-radius: .25rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 800;
+}
+
+/* Pitch */
+.pitch { padding: 1rem 3rem 1rem; }
+
+h1 {
+  max-width: 75ch;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.06;
+  letter-spacing: -.012em;
+  text-wrap: balance;
+}
+
+.nb { white-space: nowrap; }
+
+.sub {
+  max-width: 90ch;
+  margin-top: .7rem;
+  font-size: 1.5rem;
+  color: var(--mist);
+}
+
+body:not([data-phase="rest"]) h1 {
+  font-size: 1.6875rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+  max-width: none;
+}
+body:not([data-phase="rest"]) .pitch { padding: .75rem 3rem .9rem; }
+body:not([data-phase="rest"]) .sub { display: none; }
+
+/* The route: plate, then work, then the wall */
+.route {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr);
+  min-height: 0;
+}
+
+body:not([data-phase="rest"]) .route { grid-template-columns: 17vw minmax(0, 1fr); }
+body[data-phase="clear"] .route { grid-template-columns: minmax(0, 1fr); }
+body[data-phase="clear"] .plate { display: none; }
+
+.sign {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: .5em;
+  padding-top: .1em;
+  border: .09em solid currentColor;
+  border-radius: .2em;
+  font-size: .86em;
+  font-weight: 900;
+  line-height: 1;
+  vertical-align: .08em;
+}
+
+h2 { font-size: 2rem; font-weight: 800; line-height: 1.15; }
+
+.plate {
+  position: relative;
+  z-index: 3;
+  min-height: 0;
+  padding: 1.25rem 2rem 1.5rem 3rem;
+  background: var(--spruce);
+}
+
+.plate-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem 1.25rem; }
+.count {
+  margin-left: -.4rem;
+  padding: .18rem .4rem 0;
+  border-radius: .25rem;
+  color: var(--paper);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+body:not([data-phase="rest"]) .plate { padding: 1.5rem 1rem 1rem 1.5rem; overflow-y: auto; }
+body:not([data-phase="rest"]) .plate-head { column-gap: .9rem; }
+
+/* The pile. Hand-placed, and tilted no more than 2.5 degrees so text stays sharp. */
+.pile {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .9rem 1.5rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.slip {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 1rem 1.25rem .85rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: var(--lifted);
+  transform: translate(var(--x, 0), var(--y, 0)) rotate(var(--tilt, 0deg));
+  transition: transform .12s ease-out;
+}
+
+.slip:hover, .slip:focus-visible {
+  z-index: 2;
+  transform: translate(var(--x, 0), var(--y, 0));
+}
+
+.t, .cta { display: block; }
+.t { font-size: 1.625rem; font-weight: 800; line-height: 1.16; }
+.m { font-size: 1.1875rem; color: var(--slate); line-height: 1.25; }
+.st { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .8rem; margin-top: .55rem; }
+
+/* What's ready is the point of each slip, so it reads as a tag, apart from the source and date. */
+.s {
+  padding: .22rem .55rem .04rem;
+  border-radius: .2rem;
+  background: var(--blank);
+  color: var(--ink);
+  font-size: 1.375rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cta {
+  width: fit-content;
+  margin-top: .75rem;
+  padding: .62rem 1.2rem .4rem;
+  border-radius: .35rem;
+  background: var(--marigold);
+  color: var(--ink);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  box-shadow: inset 0 0 0 .14rem var(--marigold), inset 0 0 0 .28rem var(--ink);
+}
+
+/* Two slip forms: a sheet for what arrived, an index card for what you wrote down */
+.slip.sheet-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 1.25rem 1.25rem 0;
+  border-color: transparent var(--spruce) var(--mist) transparent;
+}
+
+.slip.card { border-radius: .3rem; }
+.slip.card .t { padding-bottom: .4rem; border-bottom: .13rem solid var(--mist); }
+
+/* The pile folds into strips once work is open */
+body:not([data-phase="rest"]) .pile {
+  grid-template-columns: minmax(0, 1fr);
+  gap: .65rem;
+  margin-top: .9rem;
+}
+
+body:not([data-phase="rest"]) .pile .slip {
+  padding: .6rem .8rem .5rem;
+  transform: rotate(var(--tilt-strip, 0deg));
+}
+
+body:not([data-phase="rest"]) .pile .slip:hover,
+body:not([data-phase="rest"]) .pile .slip:focus-visible { transform: none; }
+
+body:not([data-phase="rest"]) .pile .slip .t { font-size: 1.375rem; font-weight: 800; padding-bottom: 0; border-bottom: 0; }
+body:not([data-phase="rest"]) .pile .slip .m,
+body:not([data-phase="rest"]) .pile .slip .cta { display: none; }
+body:not([data-phase="rest"]) .pile .slip .st { margin-top: .3rem; }
+body:not([data-phase="rest"]) .pile .slip .s { font-size: 1.1875rem; }
+body:not([data-phase="rest"]) .pile .slip.sheet-form::before { display: none; }
+
+body:not([data-phase="rest"]) .pile .slip[aria-current="true"] {
+  z-index: 2;
+  padding-left: 1.2rem;
+  box-shadow: var(--lifted), inset .5rem 0 0 var(--ink);
+  transform: translateX(.9rem);
+}
+
+/* Work lane */
+.work {
+  position: relative;
+  min-height: 0;
+  background: var(--lift);
+}
+
+.work-body { min-height: 0; }
+body[data-phase="rest"] .work-body, body[data-phase="review"] .work-body { height: 100%; }
+
+.lane { position: relative; height: 100%; overflow: hidden; padding: 1.25rem 2.5rem; }
+.lane > p { margin-top: .75rem; font-size: 1.5rem; color: var(--paper); max-width: 34ch; }
+
+/* A faint edge of the finished sheet, waiting at the wall. It can't be clicked. */
+.peek {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 2.5rem;
+  height: 9rem;
+  padding: 1rem 1.5rem;
+  background: rgba(247, 250, 248, .13);
+  border-top: .13rem solid rgba(247, 250, 248, .3);
+  border-left: .13rem solid rgba(247, 250, 248, .3);
+}
+.peek p { font-size: 1.375rem; font-weight: 800; color: var(--mist); }
+
+/* Open work */
+.opened {
+  display: grid;
+  grid-template-columns: 23vw minmax(0, 1fr);
+  height: 100%;
+  min-height: 0;
+}
+
+.read {
+  position: relative;
+  z-index: 2;
+  min-height: 0;
+  padding: 1.5rem 2.25rem 1rem 2rem;
+  overflow-y: auto;
+  background: var(--spruce);
+}
+
+.read ul { margin-top: 1.1rem; }
+.read li + li { margin-top: 1.1rem; }
+
+.src { display: block; font-size: 1.5rem; font-weight: 800; color: var(--paper); line-height: 1.2; }
+.fact { display: block; margin-top: .25rem; font-size: 1.5rem; color: var(--mist); line-height: 1.26; }
+
+.read .missing {
+  padding-top: 1.1rem;
+  border-top: .13rem solid var(--lift);
+}
+.missing .src { color: var(--blank); }
+.missing .fact { color: var(--paper); }
+
+.read .none { margin-top: 1.1rem; font-size: 1.5rem; color: var(--mist); }
+
+.desk {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 1.5rem 0 1.25rem;
+  background: var(--lift);
+}
+
+/* The sheet a human reviews. Its right edge touches the wall. */
+.sheet {
+  height: 100%;
+  padding: 1.1rem 3rem 1.75rem 2.75rem;
+  overflow-y: auto;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--lifted);
+}
+
+.run { font-size: 1.5rem; font-weight: 800; color: var(--ink); }
+
+.field {
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 1fr);
+  align-items: baseline;
+  padding: .3rem 0;
+  border-bottom: .09rem solid var(--mist);
+}
+
+.run + .field { margin-top: .5rem; }
+
+.field span { font-size: 1.1875rem; font-weight: 600; color: var(--slate); }
+
+.field input {
+  width: 100%;
+  padding: .1rem .2rem;
+  border: 0;
+  border-radius: .2rem;
+  background: transparent;
+  font-family: var(--serif);
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.sheet h3 {
+  margin-top: .75rem;
+  font-family: var(--serif);
+  font-size: 1.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.letter { margin-top: 1rem; font-family: var(--serif); font-size: 1.5rem; line-height: 1.55; }
+.letter > * + * { margin-top: .85rem; }
+
+.ed {
+  max-width: 62ch;
+  border-radius: .2rem;
+  white-space: pre-wrap;
+  cursor: text;
+}
+
+.ed:hover { background: rgba(185, 208, 202, .25); }
+.sheet .ed:focus-visible { outline: .12rem solid var(--slate); outline-offset: .12rem; }
+
+.blank-field {
+  field-sizing: content;
+  min-width: 2ch;
+  max-width: 100%;
+  padding: .02rem .16rem;
+  border: 0;
+  border-bottom: .16rem solid var(--ink);
+  border-radius: .15rem .15rem 0 0;
+  background: var(--blank);
+  font-family: var(--serif);
+  font-size: inherit;
+  font-weight: 600;
+  line-height: inherit;
+}
+
+.blank-field::placeholder { color: var(--slate); opacity: 1; font-weight: 400; }
+.blank-field.nudge { outline: .22rem solid var(--ink); outline-offset: .12rem; }
+
+.row { display: grid; grid-template-columns: 13.5rem minmax(0, 1fr); gap: .1rem 1.25rem; align-items: baseline; }
+.row strong { font-weight: 600; font-size: 1.375rem; line-height: 1.3; }
+
+.fake-link { font-weight: 600; }
+.note { font-size: 1.1875rem; font-family: var(--sans); color: var(--slate); }
+
+.left-title { font-family: var(--sans); font-size: 1.1875rem; font-weight: 800; color: var(--slate); }
+.left-list { padding-left: 1.2em; list-style: disc; }
+.left-list li + li { margin-top: .3rem; }
+
+.plainly { font-family: var(--serif); font-size: 2.5rem; font-weight: 600; line-height: 1.25; margin-top: .75rem; max-width: 18ch; }
+
+/* The next task, offered after approval */
+.offer { padding: 1.5rem 3rem; max-width: 46rem; }
+.offer h2 { font-size: 2rem; }
+.offer .slip { --tilt: -.8deg; margin-top: 1.25rem; padding: 1.25rem 1.5rem 1.1rem; }
+.offer .slip .t { font-size: 2rem; }
+.offer .slip .m { font-size: 1.375rem; }
+
+.clear { padding: 2.5rem 3rem; }
+.clear p { font-size: 4.25rem; font-weight: 900; line-height: 1.06; max-width: 24ch; text-wrap: balance; }
+
+.solid-btn {
+  margin-top: 1.5rem;
+  padding: .8rem 1.5rem .6rem;
+  border: 0;
+  border-radius: .35rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 .14rem var(--paper), inset 0 0 0 .28rem var(--ink);
+}
+
+/* Confirmation, directly under the next task */
+.toast {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 46rem;
+  margin: 0 3rem;
+  padding: .85rem 1.25rem .7rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 1.375rem;
+  font-weight: 600;
+  box-shadow: var(--lifted);
+}
+
+.toast:empty { display: none; }
+
+.toast button {
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: .15em;
+  cursor: pointer;
+}
+
+.toast :focus-visible { outline-color: var(--ink); }
+
+/* Footer */
+.fine {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  align-items: center;
+  gap: 2.5rem;
+  padding: .5rem 3rem .65rem;
+  font-size: 1.1875rem;
+  line-height: 1.3;
+  color: var(--mist);
+}
+
+.link-btn {
+  flex: none;
+  padding: .1rem 0;
+  border: 0;
+  background: none;
+  color: var(--paper);
+  font-size: 1.1875rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: .15em;
+  cursor: pointer;
+}
+
+body[data-phase="clear"] .link-btn { visibility: hidden; }
+
+/* The wall */
+.wall {
+  position: relative;
+  z-index: 5;
+  background: var(--marigold);
+  color: var(--ink);
+}
+
+.wall-in {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: min(100dvh, 100%);
+  padding: 2rem 2.25rem 1.75rem;
+}
+
+.wall-line {
+  margin-top: 2.25rem;
+  font-size: 3.75rem;
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -.01em;
+}
+
+/* Fixed height, so the button stays put from one task to the next. */
+body[data-phase="rest"] .wall-line, body[data-phase="clear"] .wall-line { font-size: 3.25rem; }
+
+.wall-note { min-height: 9.7rem; margin-top: 1.25rem; font-size: 1.5rem; font-weight: 600; line-height: 1.28; }
+
+.wall-btn {
+  width: 100%;
+  margin-top: 1.75rem;
+  padding: 1.1rem 1rem .9rem;
+  border: 0;
+  border-radius: .4rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 .16rem var(--ink), inset 0 0 0 .3rem var(--marigold);
+}
+
+.wall-btn[aria-disabled="true"] {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 .22rem var(--ink);
+  cursor: not-allowed;
+}
+
+.skip-btn {
+  align-self: center;
+  margin-top: .8rem;
+  padding: .2rem .4rem;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: 1.375rem;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: .15em;
+  cursor: pointer;
+}
+
+.wall-rule { margin-top: 1.75rem; font-size: 1.5rem; font-weight: 600; line-height: 1.28; }
+body[data-phase="review"] .wall-rule { font-size: 1.25rem; }
+
+.wall-quote { margin-top: auto; padding-top: 1.5rem; font-size: 1.25rem; line-height: 1.3; }
+.wall-quote p { font-weight: 600; }
+.wall-quote footer { margin-top: .4rem; font-size: 1.1875rem; }
+
+/* Below 900px the zones stack and the wall is a sticky bottom band that keeps the button. */
+@media (max-width: 899px) {
+  html { font-size: 15px; scroll-padding-bottom: 16rem; }
+  .stage, body:not([data-phase="rest"]) .stage { display: block; height: auto; overflow: visible; }
+  body { overflow-x: clip; }
+  .floor { display: block; }
+  .bar { padding: 1rem 1rem 0; flex-wrap: wrap; gap: .5rem 1rem; }
+  .bar-right { flex-wrap: wrap; gap: .5rem 1rem; }
+  .pitch, body:not([data-phase="rest"]) .pitch { padding: 1rem; }
+  h1 { font-size: 2.15rem; }
+  body:not([data-phase="rest"]) h1 { font-size: 1.15rem; }
+  .sub { font-size: 1.2rem; }
+  .route, body:not([data-phase="rest"]) .route { display: block; }
+  .plate, body:not([data-phase="rest"]) .plate { padding: 1rem; overflow: visible; }
+  .pile { grid-template-columns: minmax(0, 1fr); }
+  .slip { transform: rotate(var(--tilt, 0deg)); }
+  .slip:hover, .slip:focus-visible { transform: none; }
+  body:not([data-phase="rest"]) .pile .slip[aria-current="true"] { transform: none; }
+  .opened { display: block; }
+  .lane, .offer, .clear { padding: 1.25rem 1rem; }
+  .offer .slip .t, .clear p { font-size: 1.9rem; }
+  .read { padding: 1.25rem 1rem; }
+  .desk { padding: 0 0 1rem; }
+  .sheet { height: auto; overflow: visible; padding: 1rem; }
+  .letter { font-size: 1.25rem; }
+  .row { grid-template-columns: minmax(0, 1fr); }
+  .field { grid-template-columns: 4.5rem minmax(0, 1fr); }
+  .toast { margin: 0 1rem 1rem; }
+  .peek { display: none; }
+  .fine { display: block; padding: 1rem 1rem 1.25rem; }
+  .fine > p { margin-top: .75rem; }
+  .wall { position: sticky; bottom: 0; }
+  .wall-in { position: static; height: auto; padding: .75rem 1rem .9rem; }
+  .wall h2 { font-size: 1.2rem; }
+  .wall-line { margin-top: .25rem; font-size: 1.6rem; }
+  body[data-phase="rest"] .wall-line, body[data-phase="clear"] .wall-line { font-size: 3.25rem; }
+
+.wall-note { min-height: 0; margin-top: .25rem; font-size: 1.05rem; }
+  .skip-btn { margin-top: .25rem; font-size: 1.05rem; }
+  .wall-btn { margin-top: .6rem; padding: .8rem 1rem .65rem; font-size: 1.4rem; }
+  .wall-rule, body[data-phase="review"] .wall-rule { margin-top: .35rem; font-size: 1.05rem; }
+  .wall-quote { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slip { transition: none; }
+}
+
+/* Real account: the plate holds more than fits, so the rest fold into one button. */
+.pile .more-li { grid-column: 1 / -1; }
+.more-btn {
+  font: inherit; font-weight: 800; font-size: 1.3rem; color: #F7FAF8; background: transparent;
+  border: .13rem dashed rgba(247,250,248,.55); border-radius: .3rem; padding: .7rem 1rem; width: 100%;
+  cursor: pointer; text-align: left;
+}
+.more-btn:hover, .more-btn:focus-visible { border-style: solid; border-color: #FFC21A; color: #FFC21A; }
+.row.num { grid-template-columns: 2rem minmax(0, 1fr); }
+.row.stack { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
