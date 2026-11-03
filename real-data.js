@@ -82,13 +82,13 @@ window.REAL = {
       made: "talking points",
       read: [
         { source: "Your task list", fact: "WSIP 1:1 with Van, Tuesdays 6:15 PM ET. Show integration-assistant progress." },
-        { source: "Your files, WSIP update for Van (Nov 2)", fact: "The Oct 30 deliverable is met. xMIL run 1 on Macon passed for $1.47. 25 methods raised 227 required decisions, and 91 are still open." },
+        { source: "Your files, WSIP update for Van (Nov 2)", fact: "The Oct 30 deliverable is met. xMIL run 1 on the lab server passed for $1.47. 25 methods raised 227 required decisions, and 91 are still open." },
         { source: "Your files, the update's open asks", fact: "Van's list of about 10 methods, lab defaults, equivalence margins and GPU clearance." }
       ],
       heading: "Talking points for Van",
       body: [
         { label: "What I built since the last check-in", text: "The A/B line you asked for on Oct 30 is met. Every change is labeled A or B before code is written, plain code checks the plan against the diff, and framework edits stay in their own patch. Real Haiku agents integrated xMIL with 0 framework files." },
-        { label: "Live demo", text: "xMIL run 1 on Macon: passed end to end for $1.47, exact parity on 2 of 2 cases, 9 of 9 mutations caught." },
+        { label: "Live demo", text: "xMIL run 1 on the lab server: passed end to end for $1.47, exact parity on 2 of 2 cases, 9 of 9 mutations caught." },
         { label: "Open problems and blockers", text: "Across 25 methods, reviewers raised 227 required decisions, about 9 per method. 91 are still open. Missing packages stopped two runs, and agents asked for framework changes they didn't need." },
         { label: "What I'll do before next Tuesday", text: "Pinned images for more methods, tests that count unneeded stops, and the 10-method stress test once I have your list." },
         { label: "What I need from Van", text: "Your list of about 10 methods, a ruling on the lab defaults file, equivalence margins and GPU clearance. Please check the xMIL eight-bag change first." }
