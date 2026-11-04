@@ -45,7 +45,7 @@ window.REAL = { tasks: [
     ],
     "wall": "Conscience stopped here. Approve, and the email goes to your Outlook Drafts, ready to send.",
     "action": "Approve, put it in Outlook",
-    "toast": "Approved. In the real app this lands in your Outlook Drafts. This page sends nothing."
+    "toast": "Approved."
   },
   {
     "id": "redhat",
@@ -68,8 +68,8 @@ window.REAL = { tasks: [
         "fact": "Interviewer: Scott Harwell, Senior Manager, Product Management. Prep: RHEL, OpenShift, Ansible, RHEL AI and STAR stories."
       },
       {
-        "source": "Web search, redhat.com",
-        "fact": "What each of the four products is, from Red Hat's own product pages."
+        "source": "Red Hat product overviews",
+        "fact": "What each of the four products does."
       },
       {
         "source": "Your calendar",
@@ -105,7 +105,7 @@ window.REAL = { tasks: [
     ],
     "wall": "Conscience stopped here. Change anything you like, then approve.",
     "action": "Approve plan",
-    "toast": "Approved. Nothing was saved from this page."
+    "toast": "Approved."
   },
   {
     "id": "formfill",
@@ -161,7 +161,7 @@ window.REAL = { tasks: [
     "wall": "Conscience filled the form and stopped before Submit. Check every field, write your answer, then submit it yourself.",
     "wallFilled": "Conscience stopped before Submit. Check every field, then submit it yourself.",
     "action": "I'll submit it myself",
-    "toast": "Marked ready. In the real app the form stays open in your browser. Nothing was submitted.",
+    "toast": "Ready for you to submit.",
     "r": 1.1,
     "x": "-.3rem",
     "y": ".3rem",
@@ -253,7 +253,7 @@ window.REAL = { tasks: [
     "wall": "Conscience stopped here. Fill in the blank, change anything you like, then approve.",
     "wallFilled": "Conscience stopped here. Change anything you like, then approve.",
     "action": "Approve, I'll send it",
-    "toast": "Approved. Nothing was sent from this page."
+    "toast": "Approved."
   },
   {
     "id": "quiz5",
@@ -306,7 +306,7 @@ window.REAL = { tasks: [
     ],
     "wall": "Conscience stopped here. Change anything you like, then approve.",
     "action": "Approve plan",
-    "toast": "Approved. Nothing was saved from this page."
+    "toast": "Approved."
   },
   {
     "id": "passport",
@@ -412,6 +412,6 @@ window.REAL = { tasks: [
     ],
     "wall": "Conscience stopped here. Apply to both roles first, then approve the reply.",
     "action": "Approve, I'll send it",
-    "toast": "Approved. Nothing was sent from this page."
+    "toast": "Approved."
   }
 ] };
