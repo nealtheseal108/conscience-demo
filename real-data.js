@@ -12,7 +12,7 @@ window.REAL = { tasks: [
     "rs": -1,
     "title": "Thank-you note to Tom Luong at U.S. Bank",
     "meta": "You added this after your final round. Due today.",
-    "status": "Draft ready",
+    "status": "Email ready in Outlook",
     "made": "draft",
     "read": [
       {
@@ -43,9 +43,9 @@ window.REAL = { tasks: [
       "I'm excited about the chance to join U.S. Bank in Minneapolis next summer. Thank you again for your time.",
       "Best,\nNeal"
     ],
-    "wall": "Conscience stopped here. Change anything you like, then approve.",
-    "action": "Approve, I'll send it",
-    "toast": "Approved. Nothing was sent from this page."
+    "wall": "Conscience stopped here. Approve, and the email goes to your Outlook Drafts, ready to send.",
+    "action": "Approve, put it in Outlook",
+    "toast": "Approved. In the real app this lands in your Outlook Drafts. This page sends nothing."
   },
   {
     "id": "redhat",
@@ -56,8 +56,8 @@ window.REAL = { tasks: [
     "rs": 0.8,
     "title": "Get ready for the Red Hat interview Friday",
     "meta": "From a recruiter's email. Fri 11:30 AM.",
-    "status": "Plan ready",
-    "made": "plan",
+    "status": "Research brief ready",
+    "made": "research brief",
     "read": [
       {
         "source": "Email from Meghan Finucane, today",
@@ -65,31 +65,38 @@ window.REAL = { tasks: [
       },
       {
         "source": "Your task list",
-        "fact": "Interviewer: Scott Harwell, Senior Manager, Product Management. Prep: RHEL, OpenShift, Ansible, RHEL AI, open-source product management and STAR stories."
+        "fact": "Interviewer: Scott Harwell, Senior Manager, Product Management. Prep: RHEL, OpenShift, Ansible, RHEL AI and STAR stories."
+      },
+      {
+        "source": "Web search, redhat.com",
+        "fact": "What each of the four products is, from Red Hat's own product pages."
       },
       {
         "source": "Your calendar",
-        "fact": "Wednesday and Thursday are open. Friday has your lab meeting from 10:00 to 11:15 AM."
-      },
-      {
-        "source": "Your files",
-        "fact": "A resume tailored to Red Hat."
+        "fact": "Friday has your lab meeting from 10:00 to 11:15 AM, right before the interview."
       }
     ],
-    "missing": "Notes on Red Hat's products. Nothing Conscience can read covers them, so the plan gives you time to read them instead of summarizing them.",
-    "heading": "Prep plan for Red Hat",
+    "heading": "Red Hat brief and prep plan",
     "body": [
       {
-        "label": "Wednesday evening",
-        "text": "Read short overviews of RHEL, OpenShift, Ansible and RHEL AI."
+        "label": "RHEL",
+        "text": "Red Hat Enterprise Linux, the operating system companies run their servers on."
+      },
+      {
+        "label": "OpenShift",
+        "text": "Red Hat's Kubernetes platform for building and running apps in containers."
+      },
+      {
+        "label": "Ansible",
+        "text": "Red Hat's tool for automating IT work, like setting up servers."
+      },
+      {
+        "label": "RHEL AI",
+        "text": "Red Hat's platform for building and running Granite AI models, with InstructLab for tuning them."
       },
       {
         "label": "Thursday",
         "text": "Pick 3 stories from your Red Hat resume. Write each one as situation, task, action and result."
-      },
-      {
-        "label": "Thursday evening",
-        "text": "Write a 30-second answer to \"Why open-source product management?\" and 2 questions for Scott."
       },
       {
         "label": "Friday 11:15 AM",
@@ -101,12 +108,160 @@ window.REAL = { tasks: [
     "toast": "Approved. Nothing was saved from this page."
   },
   {
-    "id": "quiz5",
+    "id": "formfill",
     "form": "sheet",
+    "title": "Fill in the Patreon PM Intern application",
+    "meta": "From your recruiting feed. New York.",
+    "status": "Form filled",
+    "made": "filled form",
+    "read": [
+      {
+        "source": "Your recruiting feed",
+        "fact": "Patreon, Product Manager Intern, Summer 2027, New York."
+      },
+      {
+        "source": "Your resume",
+        "fact": "University of North Carolina at Chapel Hill, B.S. Computer Science, May 2028. U.S. citizen. Open to relocation."
+      },
+      {
+        "source": "The application page",
+        "fact": "It asks for your name, school, degree, graduation date, work authorization, resume, and \"Why Patreon?\""
+      }
+    ],
+    "missing": "Your answer to \"Why Patreon?\" Conscience doesn't write that one for you, so it's left blank.",
+    "fields": [
+      {
+        "label": "Name",
+        "value": "Neal Parekh"
+      },
+      {
+        "label": "School",
+        "value": "University of North Carolina at Chapel Hill"
+      },
+      {
+        "label": "Degree",
+        "value": "B.S. Computer Science"
+      },
+      {
+        "label": "Graduation",
+        "value": "May 2028"
+      },
+      {
+        "label": "Authorized",
+        "value": "Yes, U.S. citizen"
+      },
+      {
+        "label": "Resume",
+        "value": "NealParekh_Patreon-PM_Resume.pdf"
+      }
+    ],
+    "body": [
+      "Why Patreon? Left blank for you to answer."
+    ],
+    "wall": "Conscience filled the form and stopped before Submit. Check every field, write your answer, then submit it yourself.",
+    "wallFilled": "Conscience stopped before Submit. Check every field, then submit it yourself.",
+    "action": "I'll submit it myself",
+    "toast": "Marked ready. In the real app the form stays open in your browser. Nothing was submitted.",
     "r": 1.1,
     "x": "-.3rem",
     "y": ".3rem",
-    "rs": 1.2,
+    "rs": 1.2
+  },
+  {
+    "id": "vanthread",
+    "form": "card",
+    "title": "Check in on your thread with Van",
+    "meta": "Your research mentor. 1:1 every Tuesday.",
+    "status": "Analysis ready",
+    "made": "analysis",
+    "read": [
+      {
+        "source": "Slack, Oct 26",
+        "fact": "Van said the full integration is the next step, but he wants to define scope and requirements first. He asked if you're still on the lab server."
+      },
+      {
+        "source": "GitHub, Oct 27",
+        "fact": "Van merged your pull request #7."
+      },
+      {
+        "source": "Your project docs, Oct 30 meeting",
+        "fact": "Keep adapter code apart from framework changes, and let the agent say which is which."
+      },
+      {
+        "source": "Your Nov 2 update",
+        "fact": "It ends with 7 questions for Van."
+      }
+    ],
+    "heading": "Your communication with Van",
+    "body": [
+      {
+        "label": "What he asked for",
+        "text": "Oct 26: define scope and requirements before the full integration. Oct 30: keep adapter code and framework changes apart."
+      },
+      {
+        "label": "What you delivered",
+        "text": "The adapter and framework split is met. A written update on Nov 2, and a progress PDF and demo site on Nov 3."
+      },
+      {
+        "label": "What's still open",
+        "text": "All 7 questions in your Nov 2 update. The top two are his ruling on the lab defaults file and his list of about 10 methods."
+      },
+      {
+        "label": "What the record shows",
+        "text": "His last written reply here is from Oct 26. Most of his answers come in your meetings, not in writing."
+      },
+      {
+        "label": "Next step",
+        "text": "Bring the top two questions to the 1:1 and get an answer before you send another document."
+      }
+    ],
+    "wall": "Conscience stopped here. You decide what to ask Van.",
+    "action": "Got it",
+    "toast": "Saved for your 1:1.",
+    "r": 2,
+    "x": ".6rem",
+    "y": ".55rem",
+    "rs": 0.9
+  },
+  {
+    "id": "ojas",
+    "form": "sheet",
+    "r": -1.3,
+    "x": "1.1rem",
+    "y": ".9rem",
+    "rs": -1.1,
+    "title": "Follow up with Ojas about Moonshot",
+    "meta": "You added this in September. It has rolled over 10 times.",
+    "status": "Draft ready",
+    "made": "draft",
+    "read": [
+      {
+        "source": "Your task list",
+        "fact": "Send the message asking to join Moonshot. It's his YC company, in the same space as Conscience. First due Sept 10, rolled over 10 times."
+      }
+    ],
+    "missing": "What Moonshot does, and your last message with Ojas. Nothing Conscience can read covers them, so the line about Moonshot is left blank.",
+    "body": [
+      "Hey Ojas,",
+      {
+        "before": "Following up on Moonshot. I'd like to join you on it. I'm building Conscience, an accountability tool that does the routine work for you and stops where it needs a person. ",
+        "blank": "how Moonshot fits Conscience",
+        "after": ""
+      },
+      "Could we find 20 minutes this week to talk about where I could help most?"
+    ],
+    "wall": "Conscience stopped here. Fill in the blank, change anything you like, then approve.",
+    "wallFilled": "Conscience stopped here. Change anything you like, then approve.",
+    "action": "Approve, I'll send it",
+    "toast": "Approved. Nothing was sent from this page."
+  },
+  {
+    "id": "quiz5",
+    "form": "sheet",
+    "r": -1.8,
+    "x": "0rem",
+    "y": "0rem",
+    "rs": -1,
     "title": "Study for COMP 311 Quiz 5",
     "meta": "From your class syllabus. Tomorrow, 3:35 PM.",
     "status": "Plan ready",
@@ -156,10 +311,10 @@ window.REAL = { tasks: [
   {
     "id": "passport",
     "form": "card",
-    "r": 2,
-    "x": ".6rem",
-    "y": ".55rem",
-    "rs": 0.9,
+    "r": 1.4,
+    "x": ".5rem",
+    "y": ".8rem",
+    "rs": 0.8,
     "title": "Mail your passport card application",
     "meta": "You added this. Due Friday.",
     "status": "Checklist ready",
@@ -206,44 +361,12 @@ window.REAL = { tasks: [
     "toast": "Marked done."
   },
   {
-    "id": "ojas",
-    "form": "sheet",
-    "r": -1.3,
-    "x": "1.1rem",
-    "y": ".9rem",
-    "rs": -1.1,
-    "title": "Follow up with Ojas about Moonshot",
-    "meta": "You added this in September. It has rolled over 10 times.",
-    "status": "Draft ready",
-    "made": "draft",
-    "read": [
-      {
-        "source": "Your task list",
-        "fact": "Send the message asking to join Moonshot. It's his YC company, in the same space as Conscience. First due Sept 10, rolled over 10 times."
-      }
-    ],
-    "missing": "What Moonshot does, and your last message with Ojas. Nothing Conscience can read covers them, so the line about Moonshot is left blank.",
-    "body": [
-      "Hey Ojas,",
-      {
-        "before": "Following up on Moonshot. I'd like to join you on it. I'm building Conscience, an accountability tool that does the routine work for you and stops where it needs a person. ",
-        "blank": "how Moonshot fits Conscience",
-        "after": ""
-      },
-      "Could we find 20 minutes this week to talk about where I could help most?"
-    ],
-    "wall": "Conscience stopped here. Fill in the blank, change anything you like, then approve.",
-    "wallFilled": "Conscience stopped here. Change anything you like, then approve.",
-    "action": "Approve, I'll send it",
-    "toast": "Approved. Nothing was sent from this page."
-  },
-  {
     "id": "video",
     "form": "card",
-    "r": -1.8,
-    "x": "0rem",
-    "y": "0rem",
-    "rs": -1,
+    "r": 1.1,
+    "x": "-.3rem",
+    "y": ".3rem",
+    "rs": 1.2,
     "title": "Record the Sandbox round 2 video",
     "meta": "You added this. Due tomorrow.",
     "status": "Yours to do",
@@ -257,10 +380,10 @@ window.REAL = { tasks: [
   {
     "id": "cargurus",
     "form": "sheet",
-    "r": 1.4,
-    "x": ".5rem",
-    "y": ".8rem",
-    "rs": 0.8,
+    "r": 2,
+    "x": ".6rem",
+    "y": ".55rem",
+    "rs": 0.9,
     "title": "Re-apply to CarGurus and tell the recruiter",
     "meta": "From a recruiter's email. Due today.",
     "status": "Links and reply ready",
@@ -289,58 +412,6 @@ window.REAL = { tasks: [
     ],
     "wall": "Conscience stopped here. Apply to both roles first, then approve the reply.",
     "action": "Approve, I'll send it",
-    "toast": "Approved. Nothing was sent from this page."
-  },
-  {
-    "id": "van",
-    "form": "card",
-    "r": 1.1,
-    "x": "-.3rem",
-    "y": ".3rem",
-    "rs": 1.2,
-    "title": "Prepare for the 1:1 with Van at 6:15 PM",
-    "meta": "Every Tuesday. Due tonight.",
-    "status": "Talking points ready",
-    "made": "talking points",
-    "read": [
-      {
-        "source": "Your task list",
-        "fact": "WSIP 1:1 with Van, Tuesdays 6:15 PM ET. Show integration-assistant progress."
-      },
-      {
-        "source": "Your files, WSIP update for Van (Nov 2)",
-        "fact": "The Oct 30 deliverable is met. xMIL run 1 on the lab server passed for $1.47. 25 methods raised 227 required decisions, and 91 are still open."
-      },
-      {
-        "source": "Your files, the update's open asks",
-        "fact": "Van's list of about 10 methods, lab defaults, equivalence margins and GPU clearance."
-      }
-    ],
-    "heading": "Talking points for Van",
-    "body": [
-      {
-        "label": "What I built since the last check-in",
-        "text": "The A/B line you asked for on Oct 30 is met. Every change is labeled A or B before code is written, plain code checks the plan against the diff, and framework edits stay in their own patch. Real Haiku agents integrated xMIL with 0 framework files."
-      },
-      {
-        "label": "Live demo",
-        "text": "xMIL run 1 on the lab server: passed end to end for $1.47, exact parity on 2 of 2 cases, 9 of 9 mutations caught."
-      },
-      {
-        "label": "Open problems and blockers",
-        "text": "Across 25 methods, reviewers raised 227 required decisions, about 9 per method. 91 are still open. Missing packages stopped two runs, and agents asked for framework changes they didn't need."
-      },
-      {
-        "label": "What I'll do before next Tuesday",
-        "text": "Pinned images for more methods, tests that count unneeded stops, and the 10-method stress test once I have your list."
-      },
-      {
-        "label": "What I need from Van",
-        "text": "Your list of about 10 methods, a ruling on the lab defaults file, equivalence margins and GPU clearance. Please check the xMIL eight-bag change first."
-      }
-    ],
-    "wall": "Conscience stopped here. Change anything you like, then take it into the 6:15 PM meeting.",
-    "action": "Approve talking points",
     "toast": "Approved. Nothing was sent from this page."
   }
 ] };

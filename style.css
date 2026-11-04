@@ -644,3 +644,6 @@ body[data-phase="review"] .wall-rule { font-size: 1.25rem; }
 .more-btn:hover, .more-btn:focus-visible { border-style: solid; border-color: #FFC21A; color: #FFC21A; }
 .row.num { grid-template-columns: 2rem minmax(0, 1fr); }
 .row.stack { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+
+/* Longer form-field labels (Graduation, Authorized) fit without clipping. */
+.sheet .field { grid-template-columns: 8.5rem minmax(0, 1fr); }
