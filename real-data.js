@@ -263,13 +263,13 @@ window.REAL = { tasks: [
     "y": "0rem",
     "rs": -1,
     "title": "Study for COMP 311 Quiz 5",
-    "meta": "From your class syllabus. Tomorrow, 3:35 PM.",
+    "meta": "From your class syllabus. Today, 3:35 PM.",
     "status": "Plan ready",
     "made": "plan",
     "read": [
       {
         "source": "Your task list",
-        "fact": "COMP 311 Quiz 5, in class Wed Nov 4 at 3:35 PM."
+        "fact": "COMP 311 Quiz 5, in class today, Wed Nov 4, at 3:35 PM."
       },
       {
         "source": "Your files, Quiz 5 study guide",

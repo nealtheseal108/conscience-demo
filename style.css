@@ -647,3 +647,10 @@ body[data-phase="review"] .wall-rule { font-size: 1.25rem; }
 
 /* Longer form-field labels (Graduation, Authorized) fit without clipping. */
 .sheet .field { grid-template-columns: 8.5rem minmax(0, 1fr); }
+
+/* How I decided, what I used, and the impact: shown above the plate. */
+.story { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin: 0 3rem 1.2rem; padding: 1rem 1.2rem; background: rgba(247,250,248,.08); border: .13rem solid rgba(247,250,248,.22); border-radius: .3rem; color: #F7FAF8; }
+.story b { display: block; font-weight: 800; font-size: 1.25rem; color: #FFC21A; margin-bottom: .25rem; }
+.story p { font-size: 1.1rem; line-height: 1.35; }
+body:not([data-phase="rest"]) .story { display: none; }
+@media (max-width: 760px) { .story { grid-template-columns: minmax(0, 1fr); margin: 0 1rem 1rem; } }
